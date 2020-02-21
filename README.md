@@ -12,7 +12,6 @@ I tried finishing the rest after the competition ends, with more time understand
 and coming up with some better algorithm, I am able to score 13,137,222 points, which makes my team being
 on the 91th place in United Kingdom in Extended Round (not bad).
 
-
 Score for example a: 21
 Score for example b: 4,581,800
 Score for example c: 2,441,996
