@@ -19,4 +19,4 @@ on the 91th place in United Kingdom in Extended Round (not bad).
 <li>Score for example e: 479,683</li>
 <li>Score for example f: 1,524,357</li>
 
-Total Score: 13,137,222
+<li>Total Score: 13,137,222</li>
