@@ -13,7 +13,7 @@ and coming up with some better algorithm, I am able to score 13,137,222 points, 
 on the 91th place in United Kingdom in Extended Round (not bad).
 
 Tried some better algorithm for sorting the order of the libraries, but turns out it didn't work as expected, so
-I stick to prioritise libraries with smaller signing up time and leave the rest of my testing code here.
+I stick to prioritise libraries with shorter sign up time and leave rest of my test code here.
 
 <li>Score for example a: 21</li>
 <li>Score for example b: 4,581,800</li>
