@@ -4,7 +4,7 @@ This is my attempt on 2020 Google Hash Code competition.
 
 Bad algorithm for sorting the order for library and books.
 
-Example C nearly take over an hour to run, but other examples are fine.
+Example C took me a night to run, but other examples are fine.
 
 In the online qualificaiton round, my team only score 16 marks due to bad management and having a slow start.
 
