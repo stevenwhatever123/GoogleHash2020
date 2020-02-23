@@ -8,9 +8,11 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class FileReader {
+	
     public static void main(String[] args) {
     	ArrayList<Library> libraries = new ArrayList<Library>();
-        String filename = "e_so_many_books.txt";
+    	String name = "c_incunabula";
+        String filename = name+ ".txt";
         
         File inputFile = new File(filename);
         
@@ -67,14 +69,22 @@ public class FileReader {
         
         
         int time = 0;
-        
+
         ArrayList<Library> sortedLibraries = new ArrayList<Library>();
         
         ArrayList<Library> signedUpLibraries = new ArrayList<Library>();
         
         ArrayList<Book> scannedBooks = new ArrayList<Book>();
         
+        boolean[] booksScanned = new boolean[totalBooks];
+        
+        for(int i = 0; i < booksScanned.length; i++) {
+        	booksScanned[i] = false;
+        }
+        
         ArrayList<Book> sortedBooks = new ArrayList<Book>(); 
+        
+        Library[] libraryArray = new Library[libraries.size()];
     	
     	boolean isSigningUp = false;
     	Library signingUpLibrary = null;
@@ -82,19 +92,12 @@ public class FileReader {
     	
     	int score = 0;
     	
-    	// Sorting the libraries based on signup time
-    	for(int s = 0; s < libraries.size(); s++){
-    		Library shortest = libraries.get(0);
-    		for(int k = s + 1; k < libraries.size() -1; k++) {
-    			if(libraries.get(s).signUpTime < shortest.signUpTime) {
-        			shortest = libraries.get(s);
-        		}
-    		}
-    		sortedLibraries.add(shortest);
+    	// Convert library arraylist to array
+    	for(int i = 0; i < libraries.size(); i++) {
+    		libraryArray[i] = libraries.get(i);
     	}
     	
-    	
-    	for(Library l : sortedLibraries) {
+    	for(Library l : libraryArray) {
     		int n = l.books.length; 
             for (int i = 1; i < n; ++i) { 
                 Book key = l.books[i]; 
@@ -105,15 +108,54 @@ public class FileReader {
                 } 
                 l.books[j] = key; 
             } 
-
     	}
+    	/*
+    	
+    	int max = libraryArray[0].potentialScore;
+    	for(int i = 0; i < libraryArray.length; i++) {
+    		if(libraryArray[i].potentialScore > max) {
+    			max = libraryArray[i].potentialScore;
+    		}
+    	}
+    	
+    	// Sorting the libraries based on potential score using insertion sort
+    	for(int s = 0; s < libraryArray.length; s++){
+    		 int n = libraryArray.length; 
+    	        for (int i = 1; i < n; ++i) { 
+    	            Library key = libraryArray[i]; 
+    	            int j = i - 1; 
+    	            while (j >= 0 && libraryArray[j].potentialScore < key.potentialScore) { 
+    	            	libraryArray[j + 1] = libraryArray[j]; 
+    	                j = j - 1; 
+    	            } 
+    	            libraryArray[j + 1] = key; 
+    	        } 
+    	}
+    	*/
+    	
+    	
+    	// Sorting the libraries based on signup time using insertion sort
+    	for(int s = 0; s < libraryArray.length ; s++){
+   		 int n = libraryArray.length; 
+   	        for (int i = 1; i < n; ++i) { 
+   	            Library key = libraryArray[i]; 
+   	            int j = i - 1; 
+   	            while (j >= 0 && libraryArray[j].signUpTime < key.signUpTime) { 
+   	            	libraryArray[j + 1] = libraryArray[j]; 
+   	                j = j - 1; 
+   	            } 
+   	            libraryArray[j + 1] = key; 
+   	        } 
+   		}
+   		
+    	
+    	
 
     	/*
     	for(int i = 0; i < sortedLibraries.size(); i++) {
     		Library key = sortedLibraries.get(0);
     		int j = i;
-    		while(j > 0 && sortedLibraries.get(j-1).potentialScore < key.potentialScore 
-    				&& sortedLibraries.get(j-1).potentialScore > average) {
+    		while(j > 0 && sortedLibraries.get(j-1).potentialScore < key.potentialScore) {
     			Library temp = sortedLibraries.get(j-1);
     			sortedLibraries.remove(j);
     			sortedLibraries.add(j, temp);
@@ -124,13 +166,15 @@ public class FileReader {
     	}
     	*/
     	
+    	
 
    
+    	
     	
     	System.out.println("Time given: " + scanDays);
     	for(time = 0; time <= scanDays; time++) {
     		
-    		//System.out.println("Time - " + time);
+    		System.out.println("Time - " + time);
     		//System.out.println();
     		
     		signingUpTime = signingUpTime -1;
@@ -139,27 +183,16 @@ public class FileReader {
     			signedUpLibraries.add(signingUpLibrary);
     			isSigningUp = false;
     			//System.out.println("Library " + signingUpLibrary.libID + " finishes signing up");
+    			//calculatePotentialScore(libraryArray, scannedBooks);
+    			//sortLibraries(libraryArray);
     		}
     		
     		if(!isSigningUp) {
     			
-    			for(int i = 0; i < sortedLibraries.size(); i++) {
-    				/*
-    				// We use this for example a, d, e
-    				if(!libraries.get(i).signedUp) {
-       					signingUpLibrary = libraries.get(i);
-       					signingUpTime = libraries.get(i).signUpTime;
-       					isSigningUp = true;
-       					//System.out.println("Signing up library " + libraries.get(i).libID);
-       				}
-       				*/
-    				
-    				
-    				
-    				// We use this for example b, c ,f
-    				if(!sortedLibraries.get(i).signedUp) {
-       					signingUpLibrary = sortedLibraries.get(i);
-       					signingUpTime = sortedLibraries.get(i).signUpTime;
+    			for(int i = 0; i < libraryArray.length; i++) {
+    				if(!libraryArray[i].signedUp) {
+       					signingUpLibrary = libraryArray[i];
+       					signingUpTime = libraryArray[i].signUpTime;
        					isSigningUp = true;
        					//System.out.println("Signing up library " + libraries.get(i).libID);
        				}
@@ -178,21 +211,21 @@ public class FileReader {
 							score += l.books[temp].getScore();
 							scannedBooks.add(l.books[temp]);
 							l.scannedBooks.add(l.books[temp]);
+							booksScanned[l.books[temp].getBookID()] = true;
 							count ++;
 							//System.out.println("Library " + l.libID);
 							//System.out.println("Book: " + l.books[temp].getBookID() + " scanned");
 							//System.out.println();
 						} else {
 							while(count != l.numBooksShippedDaily && temp < l.books.length){
-								for(int i = 0; i < scannedBooks.size(); i++) {
-									if(l.books[temp].getBookID() == scannedBooks.get(i).getBookID()) {
-										scannedBefore = true;
-									}
+								if(booksScanned[l.books[temp].getBookID()]) {
+									scannedBefore = true;
 								}
 								if(!scannedBefore) {
 									score += l.books[temp].getScore();
 	    							scannedBooks.add(l.books[temp]);
 	    							l.scannedBooks.add(l.books[temp]);
+	    							booksScanned[l.books[temp].getBookID()] = true;
 	    							count ++;
 	    							//System.out.println("Library " + l.libID);
 	    							//System.out.println("Book: " + l.books[temp].getBookID() + " scanned");
@@ -209,20 +242,22 @@ public class FileReader {
     		}
 
     	}
-    	
-    	System.out.println(score);
+    	System.out.println(signedUpLibraries.size() + " libraries signed up");
+    	System.out.println("Score: " + score);
     	
     	for(int i = 0; i < signedUpLibraries.size(); i++) {
     		if(signedUpLibraries.get(i).scannedBooks.isEmpty()) {
     			signedUpLibraries.remove(i);
     		}
     	}
+    	
     
     	
-    	/*
+    	
     	PrintWriter writer = null;
   	  	try {
-            writer = new PrintWriter("e.out", "UTF-8");
+  	  		String outputName = name + ".out";
+            writer = new PrintWriter(outputName, "UTF-8");
             writer.println(signedUpLibraries.size());
 
             for(int i = 0; i < signedUpLibraries.size(); i++) {
@@ -239,9 +274,97 @@ public class FileReader {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        */
         
+        
+    	for(Library l : libraryArray) {
+    		//System.out.println(l);
+    	}
+    	System.out.println("Total number of books: " + totalBooks);
+    	//System.out.println("Total number of books in all libraries: " + allbooks);
     	
+    }
+    
+    public static void calculatePotentialScore(Library[] libraryArray,  ArrayList<Book> scannedBooks) {
+    	//System.out.println("Scanned Books size: " + scannedBooks.size());
+    	for(Library l : libraryArray) {
+    		if(!l.signedUp) {
+    			ArrayList<Book> temp = new ArrayList<Book>(scannedBooks);
+    			//System.out.println("Temp size: " + temp.size());
+        		int scoreTemp = 0;
+            	for(int i = 0; i < l.books.length; i++) {
+            		boolean scannedBefore = false;
+            		if(temp.isEmpty()) {
+            			scoreTemp += l.books[i].getScore();
+            			temp.add(l.books[i]);
+            		}else {
+            			for(int j = 0; j < temp.size(); j++) {
+                			if(l.books[i].getBookID() == temp.get(j).getBookID()) {
+                				scannedBefore = true;
+                			}
+                		}
+            			if(!scannedBefore) {
+            				scoreTemp += l.books[i].getScore();
+        					temp.add(l.books[i]);
+        				}
+        				scannedBefore = false;
+            		}
+            	}
+            	temp.clear();
+            	l.potentialScore = scoreTemp;
+    		}
+    	}
+    }
+    
+    public static void sortLibraries(Library[] libraryArray) {
+    	// Sorting the libraries based on potential score using insertion sort
+    	for(int s = 0; s < libraryArray.length; s++){
+    		 int n = libraryArray.length; 
+    	        for (int i = 1; i < n; ++i) { 
+    	            Library key = libraryArray[i]; 
+    	            int j = i - 1; 
+    	            while (j >= 0 && libraryArray[j].potentialScore < key.potentialScore) { 
+    	            	libraryArray[j + 1] = libraryArray[j]; 
+    	                j = j - 1; 
+    	            } 
+    	            libraryArray[j + 1] = key; 
+    	        } 
+    	}
+    	
+    	
+    	for(Library l : libraryArray) {
+    		int n = l.books.length; 
+            for (int i = 1; i < n; ++i) { 
+                Book key = l.books[i]; 
+                int j = i; 
+                while (j > 0 && (l.books[j-1].getScore() < key.getScore())) { 
+                	l.books[j] = l.books[j - 1]; 
+                    j = j - 1; 
+                } 
+                l.books[j] = key; 
+            } 
+    	}
+    	
+    	int max = libraryArray[0].potentialScore;
+    	for(int i = 0; i < libraryArray.length; i++) {
+    		if(libraryArray[i].potentialScore > max) {
+    			max = libraryArray[i].potentialScore;
+    		}
+    	}
+    	
+    	
+    	// Sorting the libraries based on signup time using insertion sort
+    	for(int s = 0; s < libraryArray.length ; s++){
+   		 int n = libraryArray.length; 
+   	        for (int i = 1; i < n; ++i) { 
+   	            Library key = libraryArray[i]; 
+   	            int j = i - 1; 
+   	            while (j >= 0 && libraryArray[j].signUpTime < key.signUpTime) { 
+   	            	libraryArray[j + 1] = libraryArray[j]; 
+   	                j = j - 1; 
+   	            } 
+   	            libraryArray[j + 1] = key; 
+   	        } 
+   		}
     }
 
 }

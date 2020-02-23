@@ -17,5 +17,9 @@ public class Book {
     public int getBookID() {
         return bookID;
     }
+    
+    public String toString() {
+    	return "BookID: " + bookID + ", Score: " + score + "\n";
+    }
 
 }

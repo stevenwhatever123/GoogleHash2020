@@ -17,7 +17,7 @@ public class Library {
         this.books = books;
         this.signUpTime = time;
         this.numBooksShippedDaily = numBooksShippedDaily;
-        potentialScore = calculate(books);
+        //potentialScore = calculate(books);
     }
     
     public ArrayList<Book> sortingBooks() {
@@ -31,16 +31,16 @@ public class Library {
     	return sortedBooks;
     }
     
-    public int calculate(Book[] book) {
+    public int calculate(Book[] books) {
     	int score = 0;
-    	for(int i = 0; i < book.length; i++) {
+    	for(int i = 0; i < books.length; i++) {
     		boolean scannedBefore = false;
     		if(scannedBooks.isEmpty()) {
     			score += books[i].getScore();
 				scannedBooks.add(books[i]);
     		}else {
     			for(int j = 0; j < scannedBooks.size(); j++) {
-        			if(book[i].getBookID() == scannedBooks.get(j).getBookID()) {
+        			if(books[i].getBookID() == scannedBooks.get(j).getBookID()) {
         				scannedBefore = true;
         			}
         		}
@@ -53,5 +53,11 @@ public class Library {
     	}
     	scannedBooks.clear();
     	return score;
+    }
+    
+    public String toString() {
+    	return "Library: " + libID +  ", signup time: " + signUpTime + ", booknum: " 
+    			+ books.length + ", Potential Score: " + potentialScore
+    			+ ", scanning per day: " + numBooksShippedDaily + " Signed Up: " + signedUp;
     }
 }
