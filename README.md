@@ -4,7 +4,7 @@ This is my attempt on 2020 Google Hash Code competition.
 
 Bad algorithm for sorting the order for library and books.
 
-In the online qualificaiton round, my team only score 16 marks due to bad management and having a slow start, we can't
+In the online qualificaiton round, my team only score 16 marks due to bad management and having a slow start. We can't
 even get our program running right.
 
 I tried finishing the rest after the competition ends, with more time understanding the question 
