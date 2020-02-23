@@ -1,6 +1,6 @@
 # GoogleHashCode2020
 
-This is my attempt on 2020 Google Hash competition.
+This is my attempt on 2020 Google Hash Code competition.
 
 Bad algorithm for sorting the order for library and books.
 
