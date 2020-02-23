@@ -16,10 +16,10 @@ Tried some better algorithm for sorting the order of the libraries, but turns ou
 I stick to prioritise libraries with shorter sign up time and leave rest of my test code here.
 
 <li>Score for example a: 21</li>
-<li>Score for example b: 4,581,800</li>
-<li>Score for example c: 2,441,996</li>
+<li>Score for example b: 5,822,900</li>
+<li>Score for example c: 5,467,966</li>
 <li>Score for example d: 4,109,365</li>
-<li>Score for example e: 479,683</li>
-<li>Score for example f: 1,524,357</li>
+<li>Score for example e: 4,367,100</li>
+<li>Score for example f: 2,703,359</li>
 
-<li>Total Score: 13,137,222</li>
+<li>Total Score: 22,470,711</li>
