@@ -1,4 +1,4 @@
-# GoogleHash2020
+# GoogleHashCode2020
 
 This is my attempt on 2020 Google Hash competition.
 
